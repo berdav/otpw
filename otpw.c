@@ -68,7 +68,10 @@ static struct otpw_pwdbuf *otpw_malloc_pwdbuf(void)
   
   buflen = sysconf(_SC_GETPW_R_SIZE_MAX); /* typical value: 1024 */
   /* fprintf(stderr, "_SC_GETPW_R_SIZE_MAX = %ld\n", buflen); */
-  if (buflen < 0) return NULL;
+  if (buflen < 0) {
+    /* Fixed size if sysconf fails */
+    buflen = 1024;
+  }
   p = (struct otpw_pwdbuf *) malloc(sizeof(struct otpw_pwdbuf) + buflen);
   if (p) p->buflen = buflen;
   return p;
