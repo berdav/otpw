@@ -1,0 +1,36 @@
+ - implement options use_first_pass and try_first_pass, like
+   the kerb5 module does (pb)
+
+ - check what other "standard" options every pam module should
+   offer (pb)
+
+ - option for otpw-gen to generate only one single password (pb)
+
+ - global config file; reduce the number of compile-time options (pb)
+
+ - move .otpw out of home directory, in order to
+     - make it work if $HOME is not yet mounted (/var/otpw/$LOGNAME) (pb)
+     - users can be prevented from recycling passwords
+       (this would require otpw-gen to become setuid) (some U.S. nuclear lab)
+
+ - add generation time and (optional) expiry time to .otpw file (pb)
+
+ - what happens with the 3-password challenge if there is only
+   a single password left? (pb)
+
+ - make lock timeout (default 24 h) configurable (pb)
+
+ - "buddy file" with list of other users who can add a one-time password
+
+ - add GPL boilerplate more prominently
+
+ - Compiling on openSUSE 10.3/x86_64 leads to:
+   ld --shared -o pam_otpw.so pam_otpw.o otpw-l.o rmd160.o md.o \
+     -lcrypt -lpam -lpam_misc
+   ld: pam_otpw.o: relocation R_X86_64_32 against `a local symbol' can not
+   be used when making a shared object; recompile with -fPIC
+   pam_otpw.o: could not read symbols: Bad value
+
+- option for pam_otpw to restrict the passwords actually used to a
+  subset (e.g., range, modulus), for the case where multiple hosts
+  have copies of the same password file but must not ask for the same.

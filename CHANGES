@@ -1,0 +1,68 @@
+
+OTPW revision history
+---------------------
+
+Changes in version 1.1 (2003-06-19)
+
+  - added pam_otpw module (with assistance from Steven Murdoch)
+
+Changes in version 1.2 (2003-08-31)
+
+  - added English 4-letter-word password option
+
+  - converted several compile-time options into run-time options
+
+Changes in version 1.3 (2003-09-30)
+
+  - added new option -s to otpw-gen
+
+  - added code to otpw.c to handle a comment line starting with '#'
+    as the second line (this is not yet used by otpw-gen)
+
+  - fixed a string manipulation bug (not security critical)
+    in otpw.c (reported by Nicolas Pougetoux)
+
+  - a few more minor bug fixes and stylistic improvements
+
+Changes in version 1.4 (2004-03-??)
+
+  - removed upper limit for entropy, i.e. passwords can now be
+    practically arbitrarily long (option -e)
+
+  - new option -o to disable the random permutation of passwords in
+    the ~/.otpw file, such that they are requested in the order
+    printed on the paper
+
+  - new option -n to suppress the 4-line header and footer on each
+    printed page
+
+  - at least one column of passwords will always be printed, even with
+    option -w 0
+
+  - new option -r suggests one random password to stdout, then exists
+
+  - new password format that uses only lowercase letters and digits (-p 3),
+    means to be easy to communicate via voice
+
+  - new option -m to generate passwords from a single randomly generated
+    key, which will be printed to stderr
+
+  - new option -k to recreate a password list from a master key generated
+    with -m (this does not affect the ~/.otpw file)
+
+  - new options -E and -P to control the entropy and form of the
+    master key generated with -m
+
+Changes in version 1.5 (2014-08-07)
+
+  - support for pseudo-user installation: if system-user “otpw” exists
+    and otpw-gen is SETUID and owned by “otpw”, the hash file will be
+    called ~otpw/john instead of ~john/.otpw, and be out of reach of
+    the user
+
+  - otpw-gen: new option -l to remove lock symlink
+    (useful if the lock is owned by “otpw” rather than the user)
+
+  - ABI of otpw.c/otpw.h changed to allow for better run-time configuration
+
+  - minor cleanup, mainly to reduce warnings of modern compilers
