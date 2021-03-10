@@ -38,8 +38,8 @@ release:
 	rsync -t otpw-$(VERSION).tar.gz $(HOME)/public_html/download/
 	rsync -t otpw.html $(HOME)/public_html/
 
-#PAMLIB=/lib/security
-PAMLIB=/lib/x86_64-linux-gnu/security
+PAMLIB=/lib/security
+#PAMLIB=/lib/x86_64-linux-gnu/security
 
 install: install-pam install-gen
 
